@@ -85,6 +85,7 @@
 
   roles:
   - openshift_manageiq
+  - openshift_project_request_template
   # Create the new templates shipped in 3.2, existing templates are left
   # unmodified. This prevents the subsequent role definition for
   # openshift_examples from failing when trying to replace templates that do
