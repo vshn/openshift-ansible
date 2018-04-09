@@ -51,3 +51,12 @@ openshift_prometheus_oauth_proxy_cpu_limit: null
 openshift_prometheus_oauth_proxy_memory_limit: null
 openshift_prometheus_oauth_proxy_cpu_requests: null
 openshift_prometheus_oauth_proxy_memory_requests: null
+
+# Firewall settings
+r_openshift_prometheus_firewall_enabled: "{{ os_firewall_enabled | default(True) }}"
+r_openshift_prometheus_use_firewalld: "{{ os_firewall_use_firewalld | default(False) }}"
+r_openshift_prometheus_os_firewall_deny: []
+r_openshift_prometheus_os_firewall_allow:
+  - service: node-exporter
+    port: "9100/tcp"
+    cond: "{{ openshift_prometheus_node_exporter_install | bool }}"
