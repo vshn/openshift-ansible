@@ -14,6 +14,13 @@
   roles:
   - role: openshift_prometheus
 
+- name: Prometheus firewall rules
+  hosts: oo_nodes_to_config
+  tasks:
+  - import_role:
+      name: openshift_prometheus
+      tasks_from: firewall.yml
+
 - name: Prometheus Install Checkpoint End
   hosts: oo_all_hosts
   gather_facts: false
