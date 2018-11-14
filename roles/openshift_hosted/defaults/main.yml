@@ -29,7 +29,7 @@ openshift_hosted_images_dict:
 ##########
 r_openshift_hosted_router_firewall_enabled: "{{ os_firewall_enabled | default(True) }}"
 r_openshift_hosted_router_use_firewalld: "{{ os_firewall_use_firewalld | default(False) }}"
-r_openshift_hosted_router_prometheus_enabled: "{{ openshift_prometheus_state is defined and openshift_prometheus_state == 'present' | default(True) }}"
+r_openshift_hosted_router_prometheus_enabled: "{{ openshift_hosted_prometheus_deploy | default(False) }}"
 
 openshift_hosted_router_selector: "{{ openshift_router_selector | default(openshift_hosted_infra_selector) }}"
 openshift_hosted_router_namespace: 'default'
@@ -68,7 +68,7 @@ openshift_hosted_router_create_certificate: True
 r_openshift_hosted_router_os_firewall_deny: []
 r_openshift_hosted_router_os_firewall_allow:
 - service: Router Statistics Port
-  port: "{{ stats_port }}/tcp"
+  port: "1936/tcp"
   cond: "{{ r_openshift_hosted_router_prometheus_enabled }}"
 
 ############
