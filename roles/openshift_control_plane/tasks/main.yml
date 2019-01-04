@@ -45,6 +45,16 @@
     mode: '0750'
   when: not openshift_is_atomic | bool
 
+- name: Create openshift audit log directory
+  file:
+    state: directory
+    path: "/var/log/origin"
+    mode: 0700
+  when:
+  - openshift.master.audit_config is defined
+  - openshift.master.audit_config.auditFilePath is defined
+  - '"/var/log/origin" in openshift.master.audit_config.auditFilePath'
+
 - name: Create the policy file if it does not already exist
   command: >
     {{ openshift_client_binary }} --config={{ openshift.common.config_base }}/master/admin.kubeconfig
@@ -58,6 +68,12 @@
     content: "{{ scheduler_config | to_nice_json }}"
     dest: "{{ openshift_master_scheduler_conf }}"
     backup: true
+
+- name: Generate encryption config
+  copy:
+    content: "{{ openshift_encryption_config }}"
+    dest: "{{ openshift_encryption_config_file }}"
+  when: openshift_encryption_config is defined
 
 - import_tasks: htpass_provider.yml
 - import_tasks: create_ca_files.yml

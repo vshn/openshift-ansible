@@ -9,7 +9,7 @@
 %global __requires_exclude ^/usr/bin/ansible-playbook$
 
 Name:           openshift-ansible
-Version:        3.10.70
+Version:        3.10.96
 Release:        1%{?dist}
 Summary:        Openshift and Atomic Enterprise Ansible
 License:        ASL 2.0
@@ -31,6 +31,8 @@ Requires:      libselinux-python
 Requires:      python-passlib
 Requires:      python2-crypto
 Requires:      patch
+Requires:      pyOpenSSL
+Requires:      openssh-clients
 
 %description
 Openshift and Atomic Enterprise Ansible
@@ -180,6 +182,116 @@ BuildArch:     noarch
 %{_datadir}/ansible/%{name}/test
 
 %changelog
+* Wed Jan 02 2019 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.96-1
+- 
+
+* Mon Dec 31 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.95-1
+- 
+
+* Fri Dec 28 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.94-1
+- 
+
+* Wed Dec 26 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.93-1
+- 
+
+* Mon Dec 24 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.92-1
+- 
+
+* Fri Dec 21 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.91-1
+- Add openshift_node_upgrade_pre_drain_hook (mgugino@redhat.com)
+- Erase docker during docker uninstall (mgugino@redhat.com)
+
+* Wed Dec 19 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.90-1
+- Pass admin kubeconfig (sdodson@redhat.com)
+
+* Mon Dec 17 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.89-1
+- Service Catalog - wait for rollout of SC API Server & SC Controller Mgr
+  (jaboyd@redhat.com)
+
+* Fri Dec 14 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.88-1
+- Handle audit log path in /var/log/origin (rsevilla@redhat.com)
+
+* Wed Dec 12 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.87-1
+- Ensure openshift_upgrade_nodes_label works (mgugino@redhat.com)
+- Update Fuse templates with 7.2 release (antonin@stefanutti.fr)
+- Fix Calico liveness and readiness checks to include Calico 3.2
+  (mleung975@gmail.com)
+- hostname is configured as local-ipv4 (bysnupy@hotmail.com)
+
+* Mon Dec 10 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.86-1
+- Update Calico RBAC (mleung975@gmail.com)
+
+* Fri Dec 07 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.85-1
+- Ensure OSE vars are not overwritten at the dynamic inventory
+  (ltomasbo@redhat.com)
+
+* Wed Dec 05 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.84-1
+- Also set etcd_cert_config_dir for calico (sdodson@redhat.com)
+- glusterfs: bind-mount /dev/mapper into the glusterfs-server container
+  (ndevos@redhat.com)
+- Install python-docker-py instead of python-docker (sgaikwad@redhat.com)
+- Install boto3 from pip (roignac@gmail.com)
+
+* Sat Dec 01 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.83-1
+- glusterfs: bind-mount /dev/disk into the glusterfs-server container
+  (ndevos@redhat.com)
+
+* Thu Nov 29 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.82-1
+- Install client package on first master for gluster (mgugino@redhat.com)
+
+* Wed Nov 28 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.81-1
+- Add openssh-clients dependency (sdodson@redhat.com)
+- deploy: no need to have volumes for /dev in privileged containers
+  (ndevos@redhat.com)
+
+* Tue Nov 27 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.80-1
+- Check for node-config.yaml file when comparing config changes. If node-
+  config.yaml does not exist, wipe contents of /tmp/.old. This copy the config
+  over if node-config.yaml was delete externally. (rhowe@redhat.com)
+- Use correct container CLI for docker or cri-o (rteague@redhat.com)
+- Add support for secret encryption (iacopo.rozzo@amadeus.com)
+- Update node config template for crio (rteague@redhat.com)
+- Add pyOpenSSL openshift-ansible dep (sdodson@redhat.com)
+- OVS: tolerate taints (roignac@gmail.com)
+- Reload tuned service when node-config.yaml has changed. (rteague@redhat.com)
+- Add network-project-id value for kubernetes config for GCP (tti@netzmarkt.de)
+- Add log persistency to ovs (farandac@redhat.com)
+
+* Thu Nov 15 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.79-1
+- 
+
+* Wed Nov 14 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.78-1
+- 
+
+* Wed Nov 14 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.77-1
+- Properly prefix certificate paths (sdodson@redhat.com)
+- Check both service catalog and install vars (ruju@itu.dk)
+- [release 3.10] Check if docker is running before attempting to restart it
+  (tzumainn@redhat.com)
+
+* Tue Nov 13 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.76-1
+- Allow failure when copying kubeconfig to user home dir. (pdd@redhat.com)
+
+* Sun Nov 11 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.75-1
+- 
+
+* Sat Nov 10 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.74-1
+- 
+
+* Sat Nov 10 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.73-1
+- 
+
+* Sat Nov 10 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.72-1
+- Update centos_repos.yml (camabeh@users.noreply.github.com)
+- Update centos_repos.yml (camabeh@users.noreply.github.com)
+- Mount /etc/pki into controller pod (mchappel@redhat.com)
+- Restart docker after openstack storage setup (tzumainn@redhat.com)
+
+* Thu Nov 08 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.71-1
+- Add readiness + liveness probes for Service Catalog (jaboyd@redhat.com)
+- Don't attemp to install packages on atomic (sdodson@redhat.com)
+- Fixes #8267 (mavazque@redhat.com)
+
 * Mon Nov 05 2018 AOS Automation Release Team <aos-team-art@redhat.com> 3.10.70-1
 - Remove openshift_disable_swap for new install (rteague@redhat.com)
 - Fix master-config.yaml path (sdodson@redhat.com)
