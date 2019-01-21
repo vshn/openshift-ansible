@@ -679,6 +679,10 @@ def map_to_pairs(source, delim="="):
     if source == {} or source == '':
         return str()
 
+    # Return early if if input already is a pairs string.
+    if isinstance(source, basestring):
+        return source
+
     return ','.join(["{}{}{}".format(key, delim, value) for key, value in iteritems(source)])
 
 
