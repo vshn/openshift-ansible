@@ -667,6 +667,9 @@ def map_from_pairs(source, delim="="):
     if source == '':
         return dict()
 
+    if isinstance(source, dict):
+        return source
+
     return dict(item.split(delim) for item in source.split(","))
 
 
@@ -676,6 +679,10 @@ def map_to_pairs(source, delim="="):
     # Some default selectors are empty strings.
     if source == {} or source == '':
         return str()
+
+    # Return early if if input already is a pairs string.
+    if isinstance(source, basestring):
+        return source
 
     return ','.join(["{}{}{}".format(key, delim, value) for key, value in iteritems(source)])
 
