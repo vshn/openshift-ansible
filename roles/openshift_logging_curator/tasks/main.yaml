@@ -115,7 +115,7 @@
     curator_cpu_request: "{{ openshift_logging_curator_cpu_request | min_cpu(openshift_logging_curator_cpu_limit | default(none)) }}"
     curator_memory_limit: "{{ openshift_logging_curator_memory_limit }}"
     curator_replicas: "{{ openshift_logging_curator_replicas | default (1) }}"
-    curator_node_selector: "{{openshift_logging_curator_nodeselector | default({})}}"
+    curator_node_selector: "{{openshift_logging_curator_nodeselector | default({}) | map_from_pairs }}"
   check_mode: no
   changed_when: no
 
