@@ -667,6 +667,9 @@ def map_from_pairs(source, delim="="):
     if source == '':
         return dict()
 
+    if isinstance(source, dict):
+        return dict()
+
     return dict(item.split(delim) for item in source.split(","))
 
 
