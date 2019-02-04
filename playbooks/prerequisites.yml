@@ -1,13 +1,5 @@
 ---
 # l_scale_up_hosts may be passed in via various scaleup plays.
-- name: Fail openshift_kubelet_name_override for new hosts
-  hosts: "{{ l_scale_up_hosts | default('nodes') }}"
-  tasks:
-  - name: Fail when openshift_kubelet_name_override is defined
-    fail:
-      msg: "openshift_kubelet_name_override Cannot be defined for new hosts"
-    when: openshift_kubelet_name_override is defined
-
 - import_playbook: init/main.yml
   vars:
     l_install_base_packages: True
