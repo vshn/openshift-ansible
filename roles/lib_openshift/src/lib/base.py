@@ -97,6 +97,7 @@ class OpenShiftCLI(object):
         cmd = ['replace', '-f', fname]
         if force:
             cmd.append('--force')
+            cmd.append('--cascade=true')
         return self.openshift_cmd(cmd)
 
     def _create_from_content(self, rname, content):
