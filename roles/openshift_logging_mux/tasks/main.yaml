@@ -186,7 +186,7 @@
     mux_cpu_request: "{{ openshift_logging_mux_cpu_request | min_cpu(openshift_logging_mux_cpu_limit | default(none)) }}"
     mux_memory_limit: "{{ openshift_logging_mux_memory_limit }}"
     mux_replicas: "{{ openshift_logging_mux_replicas | default(1) }}"
-    mux_node_selector: "{{ openshift_logging_mux_nodeselector | default({}) }}"
+    mux_node_selector: "{{ openshift_logging_mux_nodeselector | default({}) | map_from_pairs }}"
   check_mode: no
   changed_when: no
 
