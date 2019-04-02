@@ -3,6 +3,12 @@
   hosts: oo_all_hosts
   become: yes
   tasks:
+  # the setup task is necessary to ensure that the ansible_default_ipv4 fact exists.
+  - name: Gather networking facts
+    setup:
+      gather_subset:
+        - network
+
   - name: install NetworkManager
     package:
       name: 'NetworkManager'
