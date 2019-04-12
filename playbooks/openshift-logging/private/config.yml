@@ -13,6 +13,13 @@
           status: "In Progress"
           start: "{{ lookup('pipe', 'date +%Y%m%d%H%M%SZ') }}"
 
+- name: Convert openshift_logging_es_nodeselector using map_to_pairs
+  hosts: oo_nodes_to_config:!oo_masters
+  gather_facts: false
+  tasks:
+  - set_fact:
+      openshift_logging_es_nodeselector: "{{ openshift_logging_es_nodeselector | map_to_pairs }}"
+
 # Normally we only collect this information for our master group entries
 # we want to also collect this for nodes so we can match group entries to nodes
 - name: Get common IP facts when necessary
