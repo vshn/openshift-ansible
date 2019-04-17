@@ -31,15 +31,13 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
                 matchExpressions:
-                - key: logging-infra
-                  operator: In
-                  values:
-                  - elasticsearch
+                  - key: logging-infra
+                    operator: In
+                    values:
+                      - elasticsearch
               topologyKey: kubernetes.io/hostname
       terminationGracePeriod: 600
       serviceAccountName: aggregated-logging-elasticsearch
