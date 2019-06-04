@@ -68,6 +68,10 @@ volumeDirectory: {{ openshift_node_data_dir }}/openshift.local.volumes
 proxyArguments:
   proxy-mode:
      - {{ openshift_node_proxy_mode }}
+{% if openshift_node_proxy_mode == 'iptables' %}
+  iptables-min-sync-period:
+     - {{ openshift_node_iptables_min_sync_period }}
+{% endif %}
 {% endif %}
 volumeConfig:
   localQuota:
