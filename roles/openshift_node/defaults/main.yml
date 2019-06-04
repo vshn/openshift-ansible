@@ -7,6 +7,7 @@ osn_storage_plugin_deps:
 - iscsi
 openshift_node_local_quota_per_fsgroup: ""
 openshift_node_proxy_mode: iptables
+openshift_node_iptables_min_sync_period: '2s'
 openshift_set_node_ip: False
 openshift_config_base: '/etc/origin'
 
