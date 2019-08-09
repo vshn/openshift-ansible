@@ -14,14 +14,14 @@ data:
         url: {{ ansible_service_broker_registry_url }}
         org: {{ ansible_service_broker_registry_organization }}
         tag: {{ ansible_service_broker_registry_tag }}
-        white_list: {{ ansible_service_broker_registry_whitelist }}
-        black_list: {{ ansible_service_broker_registry_blacklist }}
+        white_list: {{ ansible_service_broker_registry_whitelist | to_json }}
+        black_list: {{ ansible_service_broker_registry_blacklist | to_json }}
         auth_type: {{ ansible_service_broker_registry_auth_type | default('') }}
         auth_name: {{ ansible_service_broker_registry_auth_name | default('') }}
       - type: local_openshift
         name: localregistry
-        white_list: {{ ansible_service_broker_local_registry_whitelist }}
-        namespaces: {{ ansible_service_broker_local_registry_namespaces }}
+        white_list: {{ ansible_service_broker_local_registry_whitelist | to_json }}
+        namespaces: {{ ansible_service_broker_local_registry_namespaces | to_json }}
     dao:
       type: crd
     log:
