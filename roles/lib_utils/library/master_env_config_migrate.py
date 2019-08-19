@@ -75,7 +75,9 @@ class SectionlessParser(configparser.RawConfigParser):
     def _write_section(self, fp, _, section_items, delimiter):
         """Override for formatting"""
         for key, value in section_items:
-            if " " in value and "\ " not in value and not value.startswith('"'):
+            if not value.startswith("'") and "${" in value:
+                value = u"'{}'".format(value)
+            elif " " in value and "\ " not in value and not value.startswith('"'):
                 value = u'"{}"'.format(value)
             if value is not None or not self._allow_no_value:
                 value = delimiter + str(value).replace('\n', '\n\t')
