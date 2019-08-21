@@ -408,6 +408,10 @@
   when: ansible_service_broker_registry_user != "" and ansible_service_broker_registry_password != ""
 
 - name: Create the Broker resource in the catalog
+  register: csb_create_result
+  retries: 10
+  delay: 30
+  until: csb_create_result is succeeded
   oc_obj:
     name: ansible-service-broker
     state: present
