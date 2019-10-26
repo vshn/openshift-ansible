@@ -31,7 +31,7 @@ def validate_labels(labels_found):
             raise errors.AnsibleModuleError(msg)
 
 
-def process_group(group, groups_found, labels_found):
+def process_group(group, groups_found, labels_found, render_template):
     """Validate format of each group in openshift_node_groups"""
     name = get_or_fail(group, 'name')
     if name in groups_found:
@@ -39,7 +39,7 @@ def process_group(group, groups_found, labels_found):
                " openshift_node_groups").format(name)
         raise errors.AnsibleModuleError(msg)
     groups_found.add(name)
-    labels = get_or_fail(group, 'labels')
+    labels = render_template(get_or_fail(group, 'labels'))
     if not issubclass(type(labels), list):
         msg = "labels value of each group in openshift_node_groups must be a list"
         raise errors.AnsibleModuleError(msg)
@@ -115,7 +115,9 @@ class ActionModule(ActionBase):
         labels_found = set()
         # gather the groups and labels we believe should be present.
         for group in openshift_node_groups:
-            process_group(group, groups_found, labels_found)
+            # Pass template rendering function to process group. This allows
+            # defining group labels with Jinja templates
+            process_group(group, groups_found, labels_found, self._templar.template)
 
         if len(groups_found) == 0:
             msg = "No groups found in openshift_node_groups"
