@@ -32,7 +32,7 @@
     state: present
   register: svcac
 
-- name: Set facts for registry object storage
+- name: Set facts for registry config storage
   set_fact:
     registry_obj_storage_volume_mounts:
     - name: docker-config

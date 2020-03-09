@@ -69,9 +69,7 @@
   when:
   - not (openshift_docker_hosted_registry_insecure | default(False)) | bool
 
-- include_tasks: storage/object_storage.yml
-  when:
-  - openshift_hosted_registry_storage_kind | default(none) == 'object'
+- include_tasks: storage/registry_config.yml
 
 - name: Update openshift_hosted facts for persistent volumes
   set_fact:
