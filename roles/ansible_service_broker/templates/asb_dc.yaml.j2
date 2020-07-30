@@ -68,7 +68,7 @@ spec:
               port: 1338
               path: /healthz
               scheme: HTTPS
-            initialDelaySeconds: 15
+            initialDelaySeconds: {{ ansible_service_broker_liveness_initial_delay_seconds }}
             timeoutSeconds: 1
       volumes:
         - name: config-volume
