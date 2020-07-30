@@ -39,3 +39,5 @@ ansible_service_broker_image: "{{ l_asb_image_url | regex_replace('${component}'
 #   apb_name: dh-rhscl-postgresql-apb
 # https://github.com/openshift/ansible-service-broker/blob/master/docs/config.md#secrets-configuration
 ansible_service_broker_secrets: []
+
+ansible_service_broker_liveness_initial_delay_seconds: 15
