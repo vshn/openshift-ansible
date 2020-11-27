@@ -72,6 +72,9 @@ data:
         {{ key }}: "{{ value }}"
 {% endfor %}
 {% endif %}
+{% if openshift_cluster_monitoring_grafana_external_url %}
+      hostport: {{ openshift_cluster_monitoring_grafana_external_url }}
+{% endif %}
     kubeStateMetrics:
       baseImage: {{ openshift_cluster_monitoring_operator_kube_state_metrics_image }}
 {% if openshift_cluster_monitoring_operator_node_selector is iterable and openshift_cluster_monitoring_operator_node_selector | length > 0 %}
